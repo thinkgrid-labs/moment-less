@@ -1,13 +1,16 @@
-name: CI
+name: Publish
 
 on:
   push:
-    branches: [main, dev]
-  pull_request:
+    tags:
+      - 'v*'
 
 jobs:
-  ci:
+  publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +22,7 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -26,14 +30,13 @@ jobs:
       - name: Type check
         run: pnpm typecheck
 
-      - name: Test with coverage
-        run: pnpm test:coverage
+      - name: Test
+        run: pnpm test
 
       - name: Build
         run: pnpm build
 
-      - name: Check bundle size (< 3kb gzipped)
-        run: |
-          SIZE=$(gzip -c dist/index.js | wc -c)
-          echo "Bundle size: ${SIZE} bytes (limit: 3072)"
-          [ "$SIZE" -lt 3072 ] || (echo "Bundle exceeds 3kb limit!" && exit 1)
+      - name: Publish to npm
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
