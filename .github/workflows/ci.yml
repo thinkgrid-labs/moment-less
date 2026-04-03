@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Test with coverage
+        run: pnpm test:coverage
+
+      - name: Build
+        run: pnpm build
+
+      - name: Check bundle size (< 3kb gzipped)
+        run: |
+          SIZE=$(gzip -c dist/index.js | wc -c)
+          echo "Bundle size: ${SIZE} bytes (limit: 3072)"
+          [ "$SIZE" -lt 3072 ] || (echo "Bundle exceeds 3kb limit!" && exit 1)
