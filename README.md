@@ -27,9 +27,45 @@ The TC39 Temporal API fixes JavaScript's broken `Date` object — immutable, tim
 npm install moment-less
 # or
 pnpm add moment-less
+# or
+yarn add moment-less
 ```
 
-Requires Node.js ≥ 22 (native Temporal) or a browser with Temporal support.
+## Runtime & browser support
+
+`moment-less` is a pure formatting utility — no DOM APIs, no Node.js built-ins. It runs anywhere `Temporal` is available natively or via polyfill.
+
+**Native Temporal (no polyfill needed)**
+
+| Runtime | Minimum version |
+|---------|----------------|
+| Node.js | 22.0+ |
+| Chrome / Edge | 127+ |
+| Firefox | 139+ |
+| Safari | 18.2+ |
+| Deno | 2.1+ |
+| Bun | 1.2+ |
+
+**Older environments (with polyfill)**
+
+Install a Temporal polyfill alongside `moment-less`:
+
+```sh
+npm install temporal-polyfill
+```
+
+```ts
+import 'temporal-polyfill/global'; // installs Temporal on globalThis
+import { format } from 'moment-less';
+
+format(Temporal.Now.plainDateISO(), 'YYYY-MM-DD');
+```
+
+`moment-less` has no opinion on the runtime source of `Temporal` — native or polyfilled, it works the same.
+
+**Edge & serverless runtimes**
+
+Works out of the box on Cloudflare Workers, Vercel Edge, and other V8-based edge runtimes that ship native Temporal support.
 
 ## API
 
@@ -41,7 +77,6 @@ Converts any Temporal object into a formatted string using Moment.js-style token
 import { format } from 'moment-less';
 
 // PlainDate
-format(Temporal.PlainDate.from('2026-04-09'), 'MMMM D, YYYY'); // token passthrough for unsupported tokens
 format(Temporal.PlainDate.from('2026-04-09'), 'YYYY-MM-DD');   // "2026-04-09"
 
 // PlainDateTime
@@ -96,13 +131,15 @@ fromNow(past, someOtherInstant);
 
 ## Migrating from Moment.js
 
+Moment.js is [officially in maintenance mode](https://momentjs.com/docs/#/-project-status/). The recommended migration path is to use the native Temporal API — and `moment-less` makes that transition nearly syntax-transparent.
+
 ```ts
-// Before
+// Before (Moment.js)
 import moment from 'moment';
 moment().format('YYYY-MM-DD');
 moment(someDate).fromNow();
 
-// After
+// After (moment-less + Temporal)
 import { format, fromNow } from 'moment-less';
 format(Temporal.Now.plainDateISO(), 'YYYY-MM-DD');
 fromNow(Temporal.Now.instant());
@@ -113,6 +150,35 @@ Key differences:
 - **No manipulation** — use Temporal's native `.add()` / `.subtract()` / `.until()` instead of `moment().add()`
 - **No timezone conversion** — use `Temporal.ZonedDateTime` directly
 - **Immutable by default** — no footguns
+
+## Compared to alternatives
+
+| Library | Zero deps | Temporal native | Bundle (gzip) | Token format |
+|---------|-----------|-----------------|---------------|--------------|
+| **moment-less** | ✅ | ✅ | ~936 B | ✅ |
+| moment | ❌ | ❌ | ~72 KB | ✅ |
+| date-fns | ❌ | ❌ | ~13 KB (tree-shaken) | ✅ |
+| dayjs | ❌ | ❌ | ~2.9 KB | ✅ |
+| Intl.DateTimeFormat | ✅ | ✅ | 0 B | ❌ |
+
+`moment-less` does one thing: format Temporal objects using the token syntax developers already know. It doesn't try to replace Temporal's math, parsing, or timezone engine — those are already built in.
+
+## Frequently asked questions
+
+**Does this work in the browser?**
+Yes. It also works in Node.js, Deno, Bun, and V8-based edge runtimes (Cloudflare Workers, Vercel Edge). `moment-less` uses no platform-specific APIs — only `Temporal` and `Intl.RelativeTimeFormat`, both of which are standard across all modern JS environments. See the [Runtime & browser support](#runtime--browser-support) section for version details.
+
+**Does this polyfill Temporal?**
+No. `moment-less` is a formatting utility only. It relies on `Temporal` being available in the environment. Use `temporal-polyfill` or `@js-temporal/polyfill` if you need a polyfill.
+
+**Can I use this with TypeScript?**
+Yes. First-class TypeScript support is included — types ship with the package, no `@types/*` needed.
+
+**Is it tree-shakeable?**
+Yes. `format` and `fromNow` are separate named exports. If you only import `format`, `fromNow` is excluded from your bundle entirely.
+
+**Why not just use `Intl.DateTimeFormat`?**
+`Intl.DateTimeFormat` is powerful but verbose for common use cases. Formatting a date as `YYYY-MM-DD` requires constructing an options object and post-processing the parts manually. `moment-less` reduces that to a single readable string.
 
 ## Bundle size
 
