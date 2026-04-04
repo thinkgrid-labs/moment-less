@@ -1,6 +1,6 @@
 {
   "name": "moment-less",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Zero-dependency token-based formatting for the native JavaScript Temporal API",
   "type": "module",
   "exports": {
@@ -28,11 +28,24 @@
   },
   "keywords": [
     "temporal",
+    "temporal-api",
     "date",
+    "date-format",
+    "date-formatting",
     "format",
     "moment",
+    "moment-alternative",
+    "moment-replacement",
+    "dayjs-alternative",
+    "date-fns-alternative",
     "zero-dependency",
-    "tc39"
+    "tc39",
+    "YYYY-MM-DD",
+    "fromNow",
+    "relative-time",
+    "typescript",
+    "intl",
+    "lightweight"
   ],
   "license": "MIT",
   "devDependencies": {

@@ -14,6 +14,7 @@ type RelativeUnit = 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'sec
 export function fromNow(
   temporalObj: Exclude<AnyTemporalObject, Temporal.PlainTime>,
   reference?: Temporal.Instant,
+  locale?: string,
 ): string {
   const ref = reference ?? Temporal.Now.instant();
   const target = toInstant(temporalObj as AnyTemporalObject);
@@ -43,10 +44,10 @@ export function fromNow(
     value = Math.round(diffSeconds / 60);
     unit = 'minute';
   } else {
-    value = diffSeconds;
+    value = Math.round(diffSeconds);
     unit = 'second';
   }
 
-  const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
   return rtf.format(value, unit);
 }
