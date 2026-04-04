@@ -60,6 +60,7 @@
     "vitepress": "^1.6.4",
     "vitest": "^3.0.0"
   },
+  "packageManager": "pnpm@10.23.0",
   "engines": {
     "node": ">=22"
   },
