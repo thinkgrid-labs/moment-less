@@ -1,3 +1,8 @@
+---
+title: React Recipes
+description: TypeScript React components and hooks for moment-less — RelativeTime, CalendarLabel, DurationBadge, and useFormattedDate with live updates.
+---
+
 # React Recipes
 
 TypeScript components and hooks for using moment-less in React applications.

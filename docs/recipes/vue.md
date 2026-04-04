@@ -1,3 +1,8 @@
+---
+title: Vue 3 Recipes
+description: Vue 3 composables and components for moment-less — RelativeTime.vue, useCalendar, useHumanizedDuration, and a v-date-format custom directive.
+---
+
 # Vue 3 Recipes
 
 TypeScript components and composables for using moment-less in Vue 3 applications.

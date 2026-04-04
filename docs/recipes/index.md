@@ -1,3 +1,8 @@
+---
+title: Recipes
+description: Real-world moment-less usage patterns — blog post dates, chat timestamps, countdowns, file upload times, and more.
+---
+
 # Recipes
 
 Real-world patterns for common use cases. These examples are framework-agnostic unless noted otherwise. For framework-specific integrations see the [React](/recipes/react) and [Vue](/recipes/vue) recipe pages.

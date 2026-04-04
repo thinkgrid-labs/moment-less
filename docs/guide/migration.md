@@ -1,3 +1,8 @@
+---
+title: Migrating from Moment.js
+description: Step-by-step guide to replace Moment.js with moment-less and the native Temporal API. Side-by-side token comparison, parsing, arithmetic, and timezone patterns.
+---
+
 # Migrating from Moment.js
 
 This guide is for teams moving from Moment.js (or date-fns, Luxon, dayjs) to the native Temporal API with moment-less. The token syntax is nearly identical, but the underlying model is fundamentally different — and in all the ways that make your code more correct.

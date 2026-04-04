@@ -1,3 +1,8 @@
+---
+title: calendar() — API Reference
+description: Render context-aware calendar labels like "Today at 2:05 PM", "Yesterday", "Monday", or "Apr 9, 2026" from any Temporal date or datetime object.
+---
+
 # calendar()
 
 Returns a context-aware calendar label for a date or datetime, following the same conventions as messaging apps: "Today at 2:05 PM", "Yesterday", "Monday", "Apr 9, 2026".

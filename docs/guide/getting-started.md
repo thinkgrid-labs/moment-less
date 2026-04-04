@@ -1,3 +1,8 @@
+---
+title: Getting Started
+description: Install moment-less and format Temporal objects with familiar YYYY-MM-DD token syntax in under a minute. Zero dependencies, full TypeScript support.
+---
+
 # Getting Started
 
 moment-less is a zero-dependency TypeScript library that brings Moment.js-style token formatting to the native [TC39 Temporal API](https://tc39.es/proposal-temporal/). If you already know `YYYY-MM-DD` format strings, you already know moment-less.

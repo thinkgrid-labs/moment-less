@@ -1,3 +1,8 @@
+---
+title: humanizeDuration() — API Reference
+description: Convert a Temporal.Duration to a human-readable string — "2 hours", "3 days", "1 year". Locale-aware via Intl.RelativeTimeFormat.
+---
+
 # humanizeDuration()
 
 Converts a `Temporal.Duration` to a human-readable string, choosing the most significant unit based on the total magnitude of the duration.

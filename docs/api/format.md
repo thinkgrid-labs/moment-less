@@ -1,3 +1,8 @@
+---
+title: format() — API Reference
+description: Format any Temporal object (PlainDate, Instant, ZonedDateTime) using Moment.js tokens like YYYY-MM-DD, MMM Do YYYY, and HH:mm:ss. Full token reference included.
+---
+
 # format()
 
 Token-based date and time formatting for Temporal objects.

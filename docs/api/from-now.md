@@ -1,3 +1,8 @@
+---
+title: fromNow() — API Reference
+description: Get a human-readable relative time string from a Temporal object — "3 hours ago", "in 2 days", "last year". Powered by native Intl.RelativeTimeFormat with locale support.
+---
+
 # fromNow()
 
 Returns a human-readable relative time string such as "3 hours ago" or "in 2 days".

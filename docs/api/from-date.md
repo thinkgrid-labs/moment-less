@@ -1,3 +1,8 @@
+---
+title: fromDate() — API Reference
+description: Bridge legacy JavaScript Date objects to Temporal.Instant. The fastest migration path from new Date() to the Temporal API.
+---
+
 # fromDate()
 
 Converts a JavaScript `Date` object to a `Temporal.Instant`, bridging legacy date handling code with the Temporal API.

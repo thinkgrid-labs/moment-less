@@ -1,3 +1,8 @@
+---
+title: Common Patterns
+description: Framework-agnostic moment-less patterns — ISO 8601 API timestamps, chat grouping, timezone display, sorting Temporal objects, and countdown timers.
+---
+
 # Common Patterns
 
 Framework-agnostic patterns for real-world use cases.

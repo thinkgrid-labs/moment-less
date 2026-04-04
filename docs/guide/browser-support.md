@@ -1,3 +1,8 @@
+---
+title: Browser & Runtime Support
+description: moment-less works in Node.js 22+, Chrome 127+, Firefox 139+, Safari 18.2+, Deno, Bun, and Cloudflare Workers. Polyfill guide for older environments.
+---
+
 # Browser & Runtime Support
 
 moment-less has zero runtime dependencies of its own, but it requires two platform APIs: **Temporal** and **Intl**. `Intl` is universally available; Temporal is newer and may need a polyfill in some environments.
