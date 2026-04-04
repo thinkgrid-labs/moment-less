@@ -24,7 +24,10 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "temporal",
@@ -54,6 +57,7 @@
     "temporal-polyfill": "^0.3.2",
     "tsup": "^8.0.0",
     "typescript": "^5.8.0",
+    "vitepress": "^1.6.4",
     "vitest": "^3.0.0"
   },
   "engines": {
