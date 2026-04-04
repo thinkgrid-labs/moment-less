@@ -102,3 +102,93 @@ describe('fromNow() — Temporal types', () => {
     expect(() => fromNow(time, ref)).toThrow(/PlainTime/);
   });
 });
+
+describe('fromNow() — seconds rounding', () => {
+  it('rounds 600ms to 1 second ago', () => {
+    // Math.round(-0.6) = -1, so 600ms in the past → "1 second ago"
+    const past = Temporal.Instant.fromEpochMilliseconds(REF_EPOCH_MS - 600);
+    expect(fromNow(past, ref)).toBe('1 second ago');
+  });
+
+  it('rounds 0ms to now', () => {
+    expect(fromNow(ref, ref)).toBe('now');
+  });
+
+  it('rounds sub-second future to now', () => {
+    const future = Temporal.Instant.fromEpochMilliseconds(REF_EPOCH_MS + 499);
+    expect(fromNow(future, ref)).toBe('now');
+  });
+});
+
+describe('fromNow() — locale', () => {
+  it('returns English by default', () => {
+    expect(fromNow(msBefore(3 * HOUR), ref)).toBe('3 hours ago');
+  });
+
+  it('returns Spanish with locale "es"', () => {
+    const result = fromNow(msBefore(3 * HOUR), ref, 'es');
+    expect(result).toMatch(/hace/i);
+  });
+
+  it('returns French with locale "fr"', () => {
+    const result = fromNow(msBefore(DAY), ref, 'fr');
+    expect(result).toMatch(/hier|jour/i);
+  });
+});
+
+describe('fromNow() — unit boundary conditions', () => {
+  // Exactly at each boundary — value rounds to 1, triggering the next unit
+
+  it('exactly 60 seconds → 1 minute ago', () => {
+    expect(fromNow(msBefore(60 * SECOND), ref)).toBe('1 minute ago');
+  });
+
+  it('exactly 1 hour → 1 hour ago', () => {
+    expect(fromNow(msBefore(HOUR), ref)).toBe('1 hour ago');
+  });
+
+  it('exactly 24 hours → 1 day ago (yesterday)', () => {
+    expect(fromNow(msBefore(DAY), ref)).toBe('yesterday');
+  });
+
+  it('exactly 7 days → last week (numeric: auto)', () => {
+    // Intl.RelativeTimeFormat numeric:'auto' converts -1 week to "last week"
+    expect(fromNow(msBefore(WEEK), ref)).toBe('last week');
+  });
+
+  it('exactly 30 days → last month (numeric: auto)', () => {
+    expect(fromNow(msBefore(MONTH), ref)).toBe('last month');
+  });
+
+  it('exactly 365 days → 1 year ago', () => {
+    expect(fromNow(msBefore(YEAR), ref)).toBe('last year');
+  });
+
+  it('59 seconds stays in seconds', () => {
+    expect(fromNow(msBefore(59 * SECOND), ref)).toBe('59 seconds ago');
+  });
+
+  it('just under 1 hour stays in minutes', () => {
+    expect(fromNow(msBefore(59 * MINUTE), ref)).toBe('59 minutes ago');
+  });
+});
+
+describe('fromNow() — large values', () => {
+  it('10 years ago', () => {
+    expect(fromNow(msBefore(10 * YEAR), ref)).toBe('10 years ago');
+  });
+
+  it('100 days ago → months', () => {
+    const result = fromNow(msBefore(100 * DAY), ref);
+    expect(result).toMatch(/month/);
+  });
+});
+
+describe('fromNow() — Instant default reference', () => {
+  it('uses Temporal.Now.instant() when no reference passed', () => {
+    // Create a date 5 years in the past from actual now
+    const wayBack = Temporal.Now.instant().subtract({ hours: 5 });
+    const result = fromNow(wayBack);
+    expect(result).toBe('5 hours ago');
+  });
+});

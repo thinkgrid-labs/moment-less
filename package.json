@@ -1,6 +1,6 @@
 {
   "name": "moment-less",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Zero-dependency token-based formatting for the native JavaScript Temporal API",
   "type": "module",
   "exports": {
@@ -24,15 +24,31 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "temporal",
+    "temporal-api",
     "date",
+    "date-format",
+    "date-formatting",
     "format",
     "moment",
+    "moment-alternative",
+    "moment-replacement",
+    "dayjs-alternative",
+    "date-fns-alternative",
     "zero-dependency",
-    "tc39"
+    "tc39",
+    "YYYY-MM-DD",
+    "fromNow",
+    "relative-time",
+    "typescript",
+    "intl",
+    "lightweight"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -41,6 +57,7 @@
     "temporal-polyfill": "^0.3.2",
     "tsup": "^8.0.0",
     "typescript": "^5.8.0",
+    "vitepress": "^1.6.4",
     "vitest": "^3.0.0"
   },
   "engines": {
