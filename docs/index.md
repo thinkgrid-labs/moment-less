@@ -1,5 +1,7 @@
 ---
 layout: home
+title: moment-less — Temporal API Date Formatting
+description: Zero-dependency Moment.js-style token formatting for the native JavaScript Temporal API. Format YYYY-MM-DD, relative time, calendar labels, and more. < 2KB gzipped.
 
 hero:
   name: moment-less
