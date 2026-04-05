@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/moment-less)](https://www.npmjs.com/package/moment-less)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/moment-less)](https://bundlephobia.com/package/moment-less)
-[![CI](https://github.com/your-org/moment-less/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/moment-less/actions/workflows/ci.yml)
+[![CI](https://github.com/thinkgrid-labs/moment-less/actions/workflows/ci.yml/badge.svg)](https://github.com/thinkgrid-labs/moment-less/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/moment-less)](./LICENSE)
 
 **The Moment.js-style date formatting library built for the native JavaScript Temporal API.**

@@ -54,7 +54,7 @@ export default defineConfig({
       ],
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-org/moment-less' },
+      { icon: 'github', link: 'https://github.com/thinkgrid-labs/moment-less' },
     ],
     footer: {
       message: 'Released under the MIT License.',
